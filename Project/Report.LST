@@ -1,0 +1,57 @@
+-- Alex McWhorter
+-- 4/26/2018
+
+-- This report prints out the coaches title (head/assistant coach), name (first and last), and team they coach for
+-- from the Team table. I joined two tables, Coaches and Team, to display the team name (t.team_name)
+-- with the respective coach.
+
+
+
+SQL> get C:\Oracle\Project\Report
+  1  SET PAGESIZE 22
+  2  SET LINESIZE 70
+  3  SET FEEDBACK OFF
+  4  SET PAUSE ON
+  5  TTITLE 'Coaches|Report'
+  6  BTITLE 'Public Information'
+  7  BREAK ON t.team_name SKIP 1
+  8  COL "Title" HEADING 'Coaching|Title' FORMAT A15
+  9  COL "Coach" HEADING 'Coach|Name' FORMAT A20
+ 10  COL "Team" HEADING 'Team|Name' 
+ 11  -- SQL statement
+ 12  SELECT c.coach_title AS "Title", c.first_name || ' ' || c.last_name AS "Coach", t.team_name AS "Team"
+ 13  FROM coaches c JOIN team t
+ 14  ON c.team_id = t.team_id
+ 15  ORDER BY 1, 3;
+ 16  SET FEEDBACK ON
+ 17  SET PAGESIZE 24
+ 18  SET LINESIZE 80
+ 19  SET PAUSE OFF
+ 20  CLEAR COL
+ 21  CLEAR BREAKS
+ 22  TTITLE OFF
+ 23* BTITLE OFF
+SQL> @ C:\Oracle\Project\Report
+
+Thu Apr 26                                                   page    1
+                               Coaches
+                                Report
+
+Coaching        Coach                Team                             
+Title           Name                 Name                             
+--------------- -------------------- ---------------                  
+assistant       Mark Madsen          Lakers                           
+assistant       Mike Brown           Warriors                         
+head            Tyrone Lue           Cavavliers                       
+head            Mike Budenholzer     Hawks                            
+head            John Havilcek        Knicks                           
+head            Luke Walton          Lakers                           
+head            Alvin Gentry         Pelicans                         
+head            Greg Popovich        Spurs                            
+head            Steve Kerr           Warriors                         
+
+
+
+
+                          Public Information
+SQL> spool off
